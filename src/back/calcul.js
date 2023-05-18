@@ -51,6 +51,7 @@ export function evaluateExpression(expression) {
         dict.status = true;
         dict.operand_1 = currentNumber;
         dict.resultado = currentNumber;
+        dict.error_message = "Exito";
         return dict;
     }
     
@@ -76,6 +77,7 @@ export function evaluateExpression(expression) {
     dict.resultado = result;
     // if there is no operator, we return the number
     dict.status = true;
+    dict.error_message = "Exito";
     return dict;
 }
 

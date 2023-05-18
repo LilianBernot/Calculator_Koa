@@ -50,11 +50,14 @@ let dict = {
     "resultado":null,
     "error_message":null
 }
+let status = "Status : ";
 let to_empty = false;
 
 router.get('/', async (ctx) => {
+    status = "Status";
     await ctx.render('add', {
         'output' : values,
+        'status' : "Status",
     });
 })
 
@@ -96,11 +99,13 @@ async function calculate(ctx){
 
     if(dict.status){
         values = values + " = " + dict.resultado;
+        status = "Status : Exito";
     } else {
+        status = "Status : Error";
         values = dict.error_message;
     }
 
-    console.log(dict);
+    console.log(dict.error_message);
 
     if(dict.operator === "+"){
         url = "/suma/" + dict.operand_1 + "/" + dict.operand_2;
@@ -117,6 +122,7 @@ router.get("/:dynamic/:dynamic_2/:dynamic_3", async (ctx) => {
     // const dynamic = ctx.params.dynamic;
     await ctx.render('add', {
         'output' : values,
+        'status' : status,
     });
 });
 

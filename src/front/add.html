@@ -1,0 +1,67 @@
+<h1>
+    Calculator
+</h1>
+
+<div id="word_cloud">
+    <div class="output-container" id="output">
+        <p><%- output %></p>
+    </div>
+    <form method="POST" action="/add_number" id="cero">
+        <input type="submit" name="value" value="0" class="double-custom-size number">
+    </form>
+    <form method="POST" action="/add_number" id="uno">
+        <input type="submit" name="value" value="1" class="simple-custom-size number">
+    </form>
+    <form method="POST" action="/add_number" id="dos">
+        <input type="submit" name="value" value="2" class="simple-custom-size number">
+    </form>
+    <form method="POST" action="/add_number" id="tres">
+        <input type="submit" name="value" value="3" class="simple-custom-size number">
+    </form>
+    <form method="POST" action="/add_number" id="cuatro">
+        <input type="submit" name="value" value="4" class="simple-custom-size number">
+    </form>
+    <form method="POST" action="/add_number" id="cinco">
+        <input type="submit" name="value" value="5" class="simple-custom-size number">
+    </form>
+    <form method="POST" action="/add_number" id="seis">
+        <input type="submit" name="value" value="6" class="simple-custom-size number">
+    </form>
+    <form method="POST" action="/add_number" id="siete">
+        <input type="submit" name="value" value="7" class="simple-custom-size number">
+    </form>
+    <form method="POST" action="/add_number" id="ocho">
+        <input type="submit" name="value" value="8" class="simple-custom-size number">
+    </form>
+    <form method="POST" action="/add_number" id="nueve"> 
+        <input type="submit" name="value" value="9" class="simple-custom-size number">
+    </form>
+
+    <form method="POST" action="/add_number" id="mas">
+        <input type="submit" name="value" value="+" class="simple-custom-size operator">
+    </form>
+    <form method="POST" action="/add_number" id="menos"> 
+        <input type="submit" name="value" value="-" class="simple-custom-size operator">
+    </form>
+    <form method="POST" action="/add_number" id="multi"> 
+        <input type="submit" name="value" value="*" class="simple-custom-size operator">
+    </form>
+    <form method="POST" action="/add_number" id="divide"> 
+        <input type="submit" name="value" value="/" class="simple-custom-size operator">
+    </form>
+    
+    <form method="POST" action="/delete_one_digit" id="del_uno">
+        <input type="submit" value="del" class="simple-custom-size delete">
+    </form>
+    
+    <form method="POST" action="/delete_all_digits" id="del_all">
+        <input type="submit" value="DEL ALL" class="double-custom-size delete">
+    </form>
+    
+    <form method="GET" action="/calculate" id="igual">
+        <input type="submit" value="=" class="double-custom-size igual">
+    </form>
+</div>
+
+
+<!-- <button id="fetchButton">Fetch Data</button> -->

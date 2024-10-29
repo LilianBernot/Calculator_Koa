@@ -1,11 +1,10 @@
 import koa from "koa";
 import koaLogger from "koa-logger";
-import {koaBody} from "koa-body";
 import koaRouter from "koa-router";
 import json from "koa-json";
 import render from "koa-ejs";
 import bodyparser from "koa-body-parser";
-import {evaluateExpression} from "./calcul.js"
+import { evaluateExpression } from "./calcul.js"
 
 import path from "path";
 import { fileURLToPath } from 'url';
@@ -29,26 +28,26 @@ render(app, {
     root: path.join(__dirname, '../front'),
     layout: '../front/index',
     viewExt: 'html',
-    cache: false, 
+    cache: false,
     debug: false
 })
 
 // setting the router middleware
 app.use(router.routes()).use(router.allowedMethods());
 router.get("/test", async (ctx) => {
-    ctx.body = {'msg': "This is coming from a test endpoint"}
+    ctx.body = { 'msg': "This is coming from a test endpoint" }
 });
 
 // displaying the first page
 
 let values = "";
 let dict = {
-    "operand_1":null,
-    "operator":null,
-    "operand_2":null,
-    "status":null,
-    "resultado":null,
-    "error_message":null
+    "operand_1": null,
+    "operator": null,
+    "operand_2": null,
+    "status": null,
+    "resultado": null,
+    "error_message": null
 }
 let status = "Status : ";
 let to_empty = false;
@@ -56,23 +55,23 @@ let to_empty = false;
 router.get('/', async (ctx) => {
     status = "Status";
     await ctx.render('add', {
-        'output' : values,
-        'status' : "Status",
+        'output': values,
+        'status': "Status",
     });
 })
 
 // add value
 router.post('/add_number', add_value);
-async function add_value(ctx){
-    if (to_empty){
+async function add_value(ctx) {
+    if (to_empty) {
         values = "";
         dict = {
-            "operand_1":null,
-            "operator":null,
-            "operand_2":null,
-            "status":null,
-            "resultado":null,
-            "error_message":null
+            "operand_1": null,
+            "operator": null,
+            "operand_2": null,
+            "status": null,
+            "resultado": null,
+            "error_message": null
         }
         to_empty = false;
     }
@@ -93,11 +92,11 @@ async function add_value(ctx){
 let url = "/test_calcul"
 
 router.get('/calculate', calculate);
-async function calculate(ctx){
+async function calculate(ctx) {
     dict = evaluateExpression(values);
     to_empty = true;
 
-    if(dict.status){
+    if (dict.status) {
         values = values + " = " + dict.resultado;
         status = "Status : Exito";
     } else {
@@ -107,35 +106,35 @@ async function calculate(ctx){
 
     console.log(dict.error_message);
 
-    if(dict.operator === "+"){
+    if (dict.operator === "+") {
         url = "/suma/" + dict.operand_1 + "/" + dict.operand_2;
-    } else if (dict.operator === "*"){
+    } else if (dict.operator === "*") {
         url = "/multi/" + dict.operand_1 + "/" + dict.operand_2;
     } else {
         url = "/";
     }
-    
+
     ctx.redirect(url);
 }
 
 router.get("/:dynamic/:dynamic_2/:dynamic_3", async (ctx) => {
     // const dynamic = ctx.params.dynamic;
     await ctx.render('add', {
-        'output' : values,
-        'status' : status,
+        'output': values,
+        'status': status,
     });
 });
 
 // deleting one digit
 router.post('/delete_one_digit', delete_one_digit);
-async function delete_one_digit(ctx){
+async function delete_one_digit(ctx) {
     values = values.slice(0, -1);
     ctx.redirect('/');
 }
 
 // deleting all digits
 router.post('/delete_all_digits', delete_all_digits);
-async function delete_all_digits(ctx){
+async function delete_all_digits(ctx) {
     values = "";
     ctx.redirect('/');
 }
